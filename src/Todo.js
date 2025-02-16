@@ -12,12 +12,15 @@ const Todo = (props) => {
   }
   // turnOnReadOnly 함수 작성 
   const turnOnReadOnly = (e) => {
-    if (e.key === "Enter") {
+    // if (e.key === "Enter") {
+    //   setReadOnly(true);
+    // }
+    if (e.key === "Enter" && readOnly === false) {
       setReadOnly(true);
-      console.log("On > readOnly : ", readOnly);
+      // API 호출로 바뀌면서 readOnly=true되는 수정 완료 시점에 App.js/editItem 함수 호출
+      editItem(item);
     }
   }
-  // console.log("readOnly : ", readOnly);
 
   const deleteItem = props.deleteItem; // App에서 가져온 함수 그자체
   const deleteEventHandler = () => { // 삭제 이벤트 핸들러 함수
@@ -26,13 +29,15 @@ const Todo = (props) => {
 
   const editItem = props.editItem;
   const editEventHandler = (e) => { 
-    item.title = e.target.value;
-    editItem();
+    // item.title = e.target.value;
+    // editItem(); // App.js/editItem에 한글자 씩 넘어가서 1글자 씩 API가 호출되어버림
+    setItem({...item, title: e.target.value});
   }; 
 
   const checkboxEventHandler = (e) => { 
     item.done = e.target.checked;
-    editItem();
+    // editItem();
+    editItem(item); // API 호출 시, BE Data를 수정
   }
 
   return (
