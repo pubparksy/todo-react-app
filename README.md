@@ -1,4 +1,4 @@
-# react-react-app
+# todo-react-app
 📚 IT 서적 & 모행스터디
 
 # 스터디 정보
