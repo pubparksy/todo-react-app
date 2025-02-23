@@ -6,27 +6,9 @@ import AddTodo from './AddTodo';
 import { call } from "./service/ApiService";
 
 function App() {
-  // const [items, setItems] = useState([
-  //   { id:'0', title:'Hello World 1', done: true, },
-  //   { id:'1', title:'Hello World 2', done: true, },
-  // ]);
   const [items, setItems] = useState([]);
 
-  // AS-IS
-  // useEffect(()=>{
-  //   const requestOptions = {
-  //     method: "GET",
-  //     headers: {"Content-Type": "application/json"},
-  //   };
-
-  //   fetch("http://localhost:8080/todo", requestOptions)
-  //   .then((response)=> response.json())
-  //   .then((response) => { setItems(response.data); },
-  //     (error) => {},
-  //   ); 
-  // }, []);
-
-  // TO-BE (ApiService)
+  // ApiService
   useEffect(() => { 
     call("/todo", "GET", null) 
     .then((response) => setItems(response.data));
@@ -41,16 +23,10 @@ function App() {
     .then((response) => setItems(response.data));
   };
 
-  // AS-IS
-  // const editItem = () => { // 매개변수X
-  //   setItems([...items]);
-  // }
-  // TO-BE
   const editItem = (item) => { // 매개변수O
     call("/todo", "PUT", item)
     .then((response) => setItems(response.data));
   }
-
 
   let todoItems = 
     items.length > 0 && (
